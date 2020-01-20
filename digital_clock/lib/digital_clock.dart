@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flutter_clock_helper/model.dart';
 import 'package:flutter/material.dart';
@@ -101,8 +102,8 @@ class _DigitalClockState extends State<DigitalClock> {
     final hour =
         DateFormat(widget.model.is24HourFormat ? 'HH' : 'hh').format(_dateTime);
     final minute = DateFormat('mm').format(_dateTime);
-    final fontSize = MediaQuery.of(context).size.width / 3.5;
-    final offset = -fontSize / 7;
+    final fontSize = MediaQuery.of(context).size.width / 10;
+    // final offset = -fontSize / 7;
     final defaultStyle = TextStyle(
       color: colors[_Element.text],
       fontFamily: 'PressStart2P',
@@ -116,19 +117,63 @@ class _DigitalClockState extends State<DigitalClock> {
       ],
     );
 
-    return Container(
-      color: colors[_Element.background],
-      child: Center(
-        child: DefaultTextStyle(
-          style: defaultStyle,
-          child: Stack(
-            children: <Widget>[
-              Positioned(left: offset, top: 0, child: Text(hour)),
-              Positioned(right: offset, bottom: offset, child: Text(minute)),
-            ],
-          ),
+   return Stack (
+      children: <Widget>[
+        Center (
+          child: Image.asset('third_party/age/$minute.png') 
         ),
-      ),
+        DefaultTextStyle(
+          style: defaultStyle,
+            child: Padding(
+              padding: EdgeInsets.only(top: 20.0),
+              child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                ClipOval(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(
+                      sigmaX: 5.0,
+                      sigmaY: 5.0,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(hour),
+                    )
+                  ),
+                ),
+                ClipOval(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(
+                      sigmaX: 5.0,
+                      sigmaY: 5.0,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(minute),
+                    )
+                  ),
+                ),
+              ]
+            )
+          )
+        )
+      ]
     );
+
+    // return Container(
+    //   color: colors[_Element.background],
+    //   child: Center(
+    //     child: DefaultTextStyle(
+    //       style: defaultStyle,
+    //       child: Stack(
+    //         children: <Widget>[
+    //           Positioned(left: offset, top: 0, child: Text(hour)),
+    //           Positioned(right: offset, bottom: offset, child: Text(minute)),
+    //         ],
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 }
