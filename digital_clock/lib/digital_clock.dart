@@ -117,49 +117,40 @@ class _DigitalClockState extends State<DigitalClock> {
       ],
     );
 
-   return Stack (
-      children: <Widget>[
-        Center (
-          child: Image.asset('third_party/age/$minute.png') 
-        ),
-        DefaultTextStyle(
+    return Stack(children: <Widget>[
+      Center(child: Image.asset('third_party/age/$minute.png')),
+      DefaultTextStyle(
           style: defaultStyle,
-            child: Padding(
+          child: Padding(
               padding: EdgeInsets.only(top: 20.0),
               child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                ClipOval(
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(
-                      sigmaX: 5.0,
-                      sigmaY: 5.0,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    ClipOval(
+                      child: BackdropFilter(
+                          filter: ImageFilter.blur(
+                            sigmaX: 5.0,
+                            sigmaY: 5.0,
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(hour),
+                          )),
                     ),
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(hour),
-                    )
-                  ),
-                ),
-                ClipOval(
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(
-                      sigmaX: 5.0,
-                      sigmaY: 5.0,
+                    ClipOval(
+                      child: BackdropFilter(
+                          filter: ImageFilter.blur(
+                            sigmaX: 5.0,
+                            sigmaY: 5.0,
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(minute),
+                          )),
                     ),
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(minute),
-                    )
-                  ),
-                ),
-              ]
-            )
-          )
-        )
-      ]
-    );
+                  ])))
+    ]);
 
     // return Container(
     //   color: colors[_Element.background],
